@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Practica1Movil2" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#FF9900</item> <item name="colorPrimaryVariant">#e47911</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">#232F3E</item> <item name="colorSecondaryVariant">#37475A</item>
+        <item name="colorOnSecondary">@color/white</item>
 
-    <style name="Theme.Practica1Movil2" parent="android:Theme.Material.Light.NoActionBar" />
+        <item name="android:statusBarColor">#232F3E</item>
+    </style>
 </resources>

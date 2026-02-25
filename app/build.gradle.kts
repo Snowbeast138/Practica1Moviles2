@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.practica1movil2"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.practica1movil2"
@@ -40,6 +40,12 @@ android {
 }
 
 dependencies {
+
+    //Gson
+    implementation("com.google.code.gson:gson:2.10.1")
+    //materials
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
