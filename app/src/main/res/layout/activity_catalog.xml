@@ -5,71 +5,103 @@
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/containerProducts"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:background="@color/white"
+            android:elevation="4dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Productos Disponibles"
-                android:textSize="24sp"
+                android:text="NeoAmazon"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp" />
+                android:layout_centerVertical="true" />
 
-            <com.google.android.material.card.MaterialCardView
+            <Button
+                android:id="@+id/btnGoToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CARRITO 🛒"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#4CAF50"
+                android:textColor="@android:color/white"
+                app:cornerRadius="20dp" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/containerProducts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Productos Disponibles"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:scaleType="centerInside"
-                        android:src="@android:drawable/ic_menu_gallery" />
-
-                    <TextView
-                        android:id="@+id/tvProductName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Smartphone Pro Max"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$999.00"
-                        android:textColor="#2E7D32"
-                        android:textSize="16sp" />
-
-                    <Button
-                        android:id="@+id/btnBuyProduct"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Comprar"
-                        android:layout_marginTop="8dp"
-                        app:cornerRadius="8dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-        </LinearLayout>
-    </ScrollView>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:scaleType="centerInside"
+                            android:src="@android:drawable/ic_menu_gallery" />
+
+                        <TextView
+                            android:id="@+id/tvProductName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Smartphone Pro Max"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$999.00"
+                            android:textColor="#2E7D32"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btnBuyProduct"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Agregar al Carrito"
+                            android:layout_marginTop="8dp"
+                            app:cornerRadius="8dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddProduct"

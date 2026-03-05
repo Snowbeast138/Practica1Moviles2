@@ -4,4 +4,6 @@
     <string name="title_activity_catalog">CatalogActivity</string>
     <string name="title_activity_billing">BillingActivity</string>
     <string name="title_activity_add_product">AddProductActivity</string>
+    <string name="title_activity_promo_validation">PromoValidationActivity</string>
+    <string name="title_activity_cart">CartActivity</string>
 </resources>

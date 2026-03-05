@@ -32,4 +32,16 @@ class PreferenceManager(context: Context) {
         } else mutableListOf()
     }
 
+    // Guardar lista de productos en el carrito
+    fun saveCart(cart: List<Product>) {
+        val json = gson.toJson(cart)
+        sharedPreferences.edit().putString("cart_list", json).apply()
+    }
+
+    fun getCart(): MutableList<Product> {
+        val json = sharedPreferences.getString("cart_list", null) ?: return mutableListOf()
+        val type = object : com.google.gson.reflect.TypeToken<MutableList<Product>>() {}.type
+        return gson.fromJson(json, type)
+    }
+
 }

@@ -33,6 +33,8 @@ class CatalogActivity : AppCompatActivity() {
 
         createNotificationChannel()
 
+
+
         // Configurar Botón Flotante para añadir productos
         val fab = findViewById<FloatingActionButton>(R.id.fabAddProduct)
         fab.setOnClickListener {
@@ -75,6 +77,30 @@ class CatalogActivity : AppCompatActivity() {
             }
 
             containerProducts.addView(productView)
+
+            btnBuy.setOnClickListener {
+                agregarAlCarrito(product)
+            }
+
+            val btnGoToCart = findViewById<Button>(R.id.btnGoToCart)
+            btnGoToCart.setOnClickListener {
+                val intent = Intent(this, CartActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun agregarAlCarrito(producto: Product) {
+        val cart = prefManager.getCart()
+        cart.add(producto)
+        prefManager.saveCart(cart)
+
+        Toast.makeText(this, "${producto.name} añadido al carrito (${cart.size})", Toast.LENGTH_SHORT).show()
+
+        // CONDICIÓN: Más de 2 productos activa la oferta en 20 segundos
+        if (cart.size > 2) {
+            Toast.makeText(this, "¡Condiciones de oferta detectadas!", Toast.LENGTH_SHORT).show()
+            programarPromocion(20)
         }
     }
 
@@ -114,5 +140,28 @@ class CatalogActivity : AppCompatActivity() {
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
         }
+    }
+
+    private fun programarPromocion(segundos: Int) {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as android.app.AlarmManager
+        val intent = Intent(this, PromoReceiver::class.java)
+
+        val pendingIntent = android.app.PendingIntent.getBroadcast(
+            this,
+            1001,
+            intent,
+            android.app.PendingIntent.FLAG_IMMUTABLE or android.app.PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val tiempoDeDisparo = System.currentTimeMillis() + (segundos * 1000)
+
+        // AlarmManager.RTC_WAKEUP despierta el teléfono incluso si la pantalla está apagada
+        alarmManager.setExactAndAllowWhileIdle(
+            android.app.AlarmManager.RTC_WAKEUP,
+            tiempoDeDisparo,
+            pendingIntent
+        )
+
+        Toast.makeText(this, "Oferta programada en $segundos segundos", Toast.LENGTH_SHORT).show()
     }
 }
