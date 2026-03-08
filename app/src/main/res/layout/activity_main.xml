@@ -44,4 +44,16 @@
         android:textColor="#3F51B5"
         android:layout_marginTop="16dp" />
 
+    <TextView
+        android:id="@+id/tvFcmToken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cargando token..."
+        android:textSize="10sp"
+        android:textColor="#888888"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="#F0F0F0"
+        android:layout_marginTop="20dp" />
+
 </LinearLayout>

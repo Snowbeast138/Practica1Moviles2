@@ -1,6 +1,9 @@
 package com.example.practica1movil2
 
 import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -12,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         // 1. Verificar y pedir permisos al iniciar la app
         checkNotificationPermission()
 
@@ -30,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         val etPass = findViewById<EditText>(R.id.etPass)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val tvRegister = findViewById<TextView>(R.id.tvGoToRegister)
+        val tvFcmToken = findViewById<TextView>(R.id.tvFcmToken)
 
         btnLogin.setOnClickListener {
             val inputUser = etUser.text.toString()
@@ -48,6 +54,24 @@ class MainActivity : AppCompatActivity() {
 
         tvRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                tvFcmToken.text = "Token (Toca para copiar): $token"
+
+                // Configurar el click para copiar al portapapeles
+                tvFcmToken.setOnClickListener {
+                    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clip = ClipData.newPlainText("FCM_TOKEN", token)
+                    clipboard.setPrimaryClip(clip)
+
+                    Toast.makeText(this, "Token copiado al portapapeles", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                tvFcmToken.text = "Error al obtener el token"
+            }
         }
     }
 
